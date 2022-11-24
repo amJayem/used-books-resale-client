@@ -2,6 +2,30 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const navItems = (
+    <>
+      <li>
+        <Link to='/' className="btn btn-outline bg-secondary text-white rounded-lg">Home</Link>
+      </li>
+      <li tabIndex={0}>
+        <Link className=" btn btn-outline bg-secondary text-white">
+          Categories
+        </Link>
+        <ul className="p-2 bg-white">
+          <li>
+            <Link className="btn btn-outline bg-secondary text-white rounded-lg">Submenu 1</Link>
+
+            <Link className="btn btn-outline bg-secondary text-white rounded-lg">Submenu 2</Link>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <Link to='/blog' className="btn btn-outline bg-secondary text-white rounded-lg">Blog</Link>
+
+        <Link to='/login' className="btn btn-outline bg-primary text-white rounded-lg">Login</Link>
+      </li>
+    </>
+  );
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -26,68 +50,17 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <Link>Item 1</Link>
-            </li>
-            <li tabIndex={0}>
-              <Link className="justify-between">
-                Parent
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-              </Link>
-              <ul className="p-2">
-                <li>
-                  <Link>Submenu 1</Link>
-                </li>
-                <li>
-                  <Link>Submenu 2</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link>Item 3</Link>
-            </li>
+          {navItems}
           </ul>
         </div>
-        <Link className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+        <Link to='/' className="btn btn-ghost normal-case text-xl">
+          <span className="font-bold text-4xl text-secondary">Book</span>
+          <span className="font-bold text-4xl text-primary">Store</span>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
-          <li>
-            <Link>Item 1</Link>
-          </li>
-          <li tabIndex={0}>
-            <Link>
-              Parent
-              <svg
-                className="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-              >
-                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-              </svg>
-            </Link>
-            <ul className="p-2">
-              <li>
-                <Link>Submenu 1</Link>
-              </li>
-              <li>
-                <Link>Submenu 2</Link>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <Link>Item 3</Link>
-          </li>
+          {navItems}
         </ul>
       </div>
       <div className="navbar-end">
