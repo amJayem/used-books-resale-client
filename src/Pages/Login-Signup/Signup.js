@@ -1,16 +1,25 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import SocialLogin from "./SocialLogin";
 
 const Signup = () => {
-  const { SignUpUser, updateUserProfile } = useContext(AuthContext);
+  const { user, SignUpUser, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
+
+  if (user?.email) {
+    navigate("/");
+  }
+
+  const roles = ["Buyer", "Seller"];
 
   const imgHostingKey = process.env.REACT_APP_IMGBB_KEY;
 
@@ -19,12 +28,14 @@ const Signup = () => {
     const email = form.email;
     const password = form.password;
     const image = form.image[0];
+    const role = form.role;
     console.log(image, name, email, password);
 
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
 
+    // image hosting to imgbb
     fetch(url, {
       method: "post",
       body: formData,
@@ -35,24 +46,51 @@ const Signup = () => {
           const img = data.data.display_url;
           console.log("img upload done", img);
 
+          // user creating by signup
           SignUpUser(email, password)
             .then((data) => {
               console.log(data);
               const user = { displayName: name, photoURL: img };
+              const userForDB = {
+                name,
+                email,
+                image: img,
+                role,
+              };
 
+              // user storing to db
+              fetch("http://localhost:5000/users", {
+                method: "post",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(userForDB),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  console.log('db info: ',data);
+                })
+                .catch((e) => {
+                  console.error("storing user to db error => ", e);
+                  setError(e.message);
+                });
+              setError("");
+
+              // user profile updated with name and image
               updateUserProfile(user)
                 .then((data) => {
-                  console.log("working ", data);
+                  toast.success("User created successfully");
+                  navigate("/");
                 })
                 .catch((e) => {
                   setError(e.message);
                   console.error("update error => ", e);
                 });
+              setError("");
             })
             .catch((e) => {
               console.error("signup error => ", e);
               setError(e.message);
             });
+          setError("");
         }
         console.log(data);
       })
@@ -60,7 +98,6 @@ const Signup = () => {
         setError(e.message);
         console.error("img upload error => ", e);
       });
-
     setError("");
   };
   return (
@@ -119,6 +156,26 @@ const Signup = () => {
             </div>
             <div className="form-control w-full max-w-xs">
               <label className="label">
+                <span className="label-text">Role</span>
+              </label>
+              <select
+                className="input select select-bordered w-full max-w-xs"
+                type="text"
+                {...register("role")}
+              >
+                <option disabled>Please Select a Role</option>
+                {roles.map((role, i) => (
+                  <option
+                    key={role.i}
+                    // value={role.name}
+                  >
+                    {role}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
                 <span className="label-text">Image</span>
               </label>
               <input
@@ -130,6 +187,7 @@ const Signup = () => {
               />
             </div>
             <div className="form-control">
+              {error && <p className="text-error">{error}</p>}
               <input
                 className="btn btn-primary w-full"
                 type="submit"

@@ -5,8 +5,12 @@ import SocialLogin from "./SocialLogin";
 
 const Login = () => {
     const [error, setError] = useState('');
-  const { SignInUser } = useContext(AuthContext);
+  const { user, SignInUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  if(user?.email){
+    navigate('/');
+  }
 
   const handleSubmit = (e) =>{
     e.preventDefault();
@@ -25,7 +29,8 @@ const Login = () => {
         setError(e.message)
         console.error('sign in error => ',e);
     })
-  }
+  };
+  
   return (
     <div>
       <div className="hero">

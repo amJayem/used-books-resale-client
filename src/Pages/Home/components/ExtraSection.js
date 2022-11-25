@@ -25,7 +25,7 @@ const ExtraSection = () => {
             <ul>
               {
                 cardText.map((text,i) =>
-                    <li className="mb-2">
+                    <li key={i} className="mb-2">
                         <span className="btn btn-accent mr-4 rounded-full text-white text-xl">{i+1}</span> 
                         <span className="text-xl sm:text-base font-semibold">{text}</span> 
                     </li>)
