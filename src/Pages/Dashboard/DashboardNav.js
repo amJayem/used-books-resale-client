@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../Context/AuthProvider";
+import { AuthContext } from "../../Context/AuthProvider";
 
-const Navbar = () => {
+
+const DashboardNav = () => {
   const { user, SignOutUser } = useContext(AuthContext);
 
   const handleSignOut = () =>{
@@ -21,38 +22,15 @@ const Navbar = () => {
           Home
         </Link>
       </li>
-      <li tabIndex={0}>
-        <Link className=" btn btn-outline bg-secondary text-white">
-          Categories
-        </Link>
-        <ul className="p-2 bg-white">
-          <li>
-            <Link className="btn btn-outline bg-secondary text-white rounded-lg">
-              Submenu 1
-            </Link>
-
-            <Link className="btn btn-outline bg-secondary text-white rounded-lg">
-              Submenu 2
-            </Link>
-          </li>
-        </ul>
-      </li>
+      <li className="drawer-content">
+          {/* <!-- Page content here --> */}
+          <label htmlFor="dashboard" className="btn btn-secondary drawer-button text-white">
+            Open dashboard
+          </label>
+        </li>
       <li>
-        <Link
-          to="/dashboard"
-          className="btn btn-outline bg-secondary text-white rounded-lg"
-        >
-          Dashboard
-        </Link>
-        <Link
-          to="/blog"
-          className="btn btn-outline bg-secondary text-white rounded-lg"
-        >
-          Blog
-        </Link>
-
         {user?.email ? (
-          <Link onClick={handleSignOut} className="btn btn-outline bg-error text-white rounded-lg">
+          <Link onClick={handleSignOut} className="btn btn-outline bg-warning text-white rounded-lg">
             Logout
           </Link>
         ) : (
@@ -142,4 +120,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DashboardNav;

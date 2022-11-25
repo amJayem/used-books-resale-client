@@ -11,7 +11,7 @@ const Login = () => {
   const [token]=useToken(userEmail);
   const navigate = useNavigate();
 
-  if(user?.email){
+  if(user?.email && token){
     navigate('/');
   }
 
