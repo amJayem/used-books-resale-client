@@ -22,7 +22,7 @@ const DashboardNav = () => {
           Home
         </Link>
       </li>
-      <li className="drawer-content">
+      <li className="drawer-content lg:hidden">
           {/* <!-- Page content here --> */}
           <label htmlFor="dashboard" className="btn btn-secondary drawer-button text-white">
             Open dashboard

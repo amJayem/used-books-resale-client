@@ -10,6 +10,13 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    useEffect(()=>{
+        setLoading(true);
+        setTimeout(()=>{
+          setLoading(false);
+        }, 1500);
+      },[]);
+
     const SignUpUser = (email, password) =>{
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);

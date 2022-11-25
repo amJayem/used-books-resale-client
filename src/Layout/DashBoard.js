@@ -17,7 +17,7 @@ const DashBoard = () => {
   return (
     <div>
       <DashboardNav />
-      <div className="drawer">
+      <div className="drawer drawer-mobile">
         <input id="dashboard" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center">
           <Outlet />
@@ -27,8 +27,16 @@ const DashBoard = () => {
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
-              {role === "buyer" && <Link to='/dashboard/buyer'>My Orders</Link>}
-              {role === "seller" && <Link to='/dashboard/seller'>Add Book</Link>}
+              {role === "buyer" && 
+              <>
+              <Link to='/dashboard/buyer'>My Orders</Link>
+              </>
+              }
+              {role === "seller" && <>
+              <Link to='/dashboard/add-book'>Add Book</Link>
+              <Link to='/dashboard/my-products'>My products</Link>
+              </>
+              }
               {
                 role === 'admin' &&
                 <>

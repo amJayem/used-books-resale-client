@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AuthProvider from './Context/AuthProvider';
-import { Toast } from 'react-daisyui';
+import { Toaster} from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,7 +14,7 @@ root.render(
     <QueryClientProvider client={queryClient}>
     <AuthProvider>
     <App />
-    <Toast/>
+    <Toaster/>
     </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
