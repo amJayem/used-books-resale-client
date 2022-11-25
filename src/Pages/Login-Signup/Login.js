@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import useToken from "../../Hooks/useToken";
 import SocialLogin from "./SocialLogin";
 
 const Login = () => {
     const [error, setError] = useState('');
   const { user, SignInUser } = useContext(AuthContext);
+  const [userEmail, setUserEmail] = useState('');
+  const [token]=useToken(userEmail);
   const navigate = useNavigate();
 
   if(user?.email){
@@ -23,7 +26,8 @@ const Login = () => {
     SignInUser(email, password)
     .then(data=>{
         // console.log(data);
-        navigate('/');
+        setUserEmail(email);
+        console.log(email);
     })
     .catch(e=>{
         setError(e.message)
