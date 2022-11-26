@@ -1,9 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const Navbar = () => {
   const { user, SignOutUser } = useContext(AuthContext);
+  
+  const { data: categories } = useQuery({
+    queryKey: ["category"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/categories");
+      const data = await res.json();
+      return data;
+    },
+  });
 
   const handleSignOut = () =>{
     SignOutUser()
@@ -27,13 +37,12 @@ const Navbar = () => {
         </Link>
         <ul className="p-2 bg-white">
           <li>
-            <Link className="btn btn-outline bg-secondary text-white rounded-lg">
-              Submenu 1
-            </Link>
-
-            <Link className="btn btn-outline bg-secondary text-white rounded-lg">
-              Submenu 2
-            </Link>
+            {
+              categories?.map((ctg, i)=>
+                <Link key={i} to={`/category/${ctg.categoryId}`} className="btn btn-outline bg-secondary text-white rounded-lg">
+              {ctg.category}
+            </Link>)
+            }
           </li>
         </ul>
       </li>

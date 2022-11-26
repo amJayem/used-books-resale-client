@@ -1,6 +1,6 @@
 import React from 'react';
-import Categories from '../Categories/Categories';
 import AdvertiseItems from './components/AdvertiseItems';
+import CategoryItem from './components/CategoryItem';
 import ExtraSection from './components/ExtraSection';
 import Hero from './components/Hero';
 
@@ -9,7 +9,7 @@ const Home = () => {
         <div>
             <Hero/>
             <AdvertiseItems/>
-            <Categories/>
+            <CategoryItem/>
             <ExtraSection/>
         </div>
     );

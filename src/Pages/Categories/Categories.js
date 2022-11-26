@@ -1,9 +1,10 @@
 import React from 'react';
+import CategoryItem from '../Home/components/CategoryItem';
 
 const Categories = () => {
     return (
         <div>
-            categories
+            <CategoryItem/>
         </div>
     );
 };

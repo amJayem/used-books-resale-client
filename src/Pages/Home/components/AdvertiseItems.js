@@ -11,7 +11,7 @@ const AdvertiseItems = () => {
       return data;
     },
   });
-  console.log(adBooks);
+  // console.log(adBooks);
   return (
     <div className="mx-0 my-auto">
       <label className="label">

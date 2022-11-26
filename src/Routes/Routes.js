@@ -3,6 +3,7 @@ import DashBoard from "../Layout/DashBoard";
 import Main from "../Layout/Main";
 import Blogs from "../Pages/Blogs/Blogs";
 import Categories from "../Pages/Categories/Categories";
+import CategoriesById from "../Pages/Categories/CategoriesById";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import BuyerDashboard from "../Pages/Dashboard/BuyerDashboard/BuyerDashboard";
 import MyProducts from "../Pages/Dashboard/SellerDashboard/MyProducts";
@@ -36,6 +37,11 @@ export const routes = createBrowserRouter([
       {
         path: "/blog",
         element: <Blogs />,
+      },
+      {
+        path: "/category/:id",
+        element: <CategoriesById />,
+        loader: ({params})=>fetch(`http://localhost:5000/category/${params.id}`)
       },
     ],
   },
