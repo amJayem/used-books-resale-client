@@ -126,6 +126,7 @@ const MyProducts = () => {
                 </th>
                 <td>
                   <p>{myProduct.book}</p>
+                  <p>${myProduct.price}</p>
                   {myProduct.status === "available" && (
                     <p className="text-success">{myProduct.status}</p>
                   )}
