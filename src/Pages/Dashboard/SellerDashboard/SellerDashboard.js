@@ -35,14 +35,14 @@ const SellerDashboard = () => {
 
           axios
             .post(`http://localhost:5000/books`, {
-              Book: form.book.value,
-              Author: form.author.value,
-              Price: form.price.value,
-              Condition: form.condition.value,
-              Phone: form.phone.value,
-              Location: form.location.value,
-              Description: form.description.value,
-              Category: form.category.value,
+              book: form.book.value,
+              author: form.author.value,
+              price: form.price.value,
+              condition: form.condition.value,
+              phone: form.phone.value,
+              location: form.location.value,
+              description: form.description.value,
+              categoryId: form.category.value,
               image: image,
               addedBy: user?.email,
             })
