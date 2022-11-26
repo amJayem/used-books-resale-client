@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
+  // book list are displaying by seller email
   const {
     data: myProducts,
     isLoading,
@@ -27,8 +28,7 @@ const MyProducts = () => {
     return Loader();
   }
 
-  //   console.log(myProducts);
-
+  // seller can delete their product
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost:5000/books/${id}`)
@@ -42,10 +42,11 @@ const MyProducts = () => {
       });
   };
 
+  // seller can update product status
   const handleStatus = (id, status) => {
     if (status === "available") status = "sold";
     else status = "available";
-    console.log(id, status);
+    // console.log(id, status);
 
     axios
       .patch(`http://localhost:5000/book/status/${id}`, { status })
@@ -60,9 +61,41 @@ const MyProducts = () => {
         console.error("status error => ", e);
       });
   };
+  
+  //seller can add product for advertise
+  const handleAddAdvertise = (id) =>{
+    axios
+      .patch(`http://localhost:5000/book/feature/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.data.acknowledged) {
+          toast.success("Added for advertise");
+        }
+        refetch();
+      })
+      .catch((e) => {
+        console.error("advertise error => ", e);
+      });
+  }
+
+  //seller can remove product from advertise
+  const handleRemoveAdvertise = (id) =>{
+    axios
+      .patch(`http://localhost:5000/book/feature/remove/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.data.acknowledged) {
+          toast.success("Advertise removed");
+        }
+        refetch();
+      })
+      .catch((e) => {
+        console.error("advertise error => ", e);
+      });
+  }
 
   return (
-    <div>      
+    <div>
       <div>
         <h1 className="text-4xl font-semibold my-5">MyProducts</h1>
       </div>
@@ -91,7 +124,13 @@ const MyProducts = () => {
                     </div>
                   </div>
                 </th>
-                <td>{myProduct.book}</td>
+                <td>
+                  <p>{myProduct.book}</p>
+                  {myProduct.status === "available" && (
+                    <p className="text-success">{myProduct.status}</p>
+                  )}
+                  {myProduct.status === "sold" && <p className="text-error">out of stock</p>}
+                </td>
                 <td>{myProduct.author}</td>
                 <td>{myProduct.categoryId}</td>
                 <td>
@@ -103,7 +142,7 @@ const MyProducts = () => {
                       }
                       value="available"
                     >
-                    Make  Available
+                      Make Available
                     </button>
                   )}
                   {myProduct.status !== "sold" && (
@@ -119,8 +158,24 @@ const MyProducts = () => {
                   )}
                 </td>
                 <td>
-                    <button className="btn btn-secondary mr-1 text-white">Add</button>
-                    <button className="btn btn-primary text-white">Remove</button>
+                    {myProduct.status === 'sold' && <>
+                    <button className="btn mr-1" disabled>Add</button>
+                    <button className="btn " disabled>Remove</button>
+                    </>}
+
+                  {myProduct.status === 'available' &&
+                  <>
+                  
+                  {myProduct.advertise === false ? <button onClick={()=>handleAddAdvertise(myProduct._id)} className="btn btn-secondary mr-1 text-white">
+                    Add
+                  </button>
+                  :
+                  <button className="btn mr-1" disabled>Add</button>}
+
+                  {myProduct.advertise === true ? <button onClick={()=>handleRemoveAdvertise(myProduct._id)} className="btn btn-primary text-white">Remove</button>
+                  :
+                  <button className="btn mr-1" disabled>Remove</button>}
+                  </>}
                 </td>
                 <td>
                   <button

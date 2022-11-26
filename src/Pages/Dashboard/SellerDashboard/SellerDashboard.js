@@ -46,6 +46,7 @@ const SellerDashboard = () => {
               image: image,
               addedBy: user?.email,
               status: 'available',
+              advertise: false,
             })
             .then((result) => {
               if (result.data.acknowledged) {
