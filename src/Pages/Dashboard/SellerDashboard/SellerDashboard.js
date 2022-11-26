@@ -45,6 +45,7 @@ const SellerDashboard = () => {
               categoryId: form.category.value,
               image: image,
               addedBy: user?.email,
+              status: 'available',
             })
             .then((result) => {
               if (result.data.acknowledged) {
@@ -69,7 +70,7 @@ const SellerDashboard = () => {
   return (
     <div className="my-5">
       <div>
-        <h1 className="text-4xl font-semibold">Add a Book</h1>
+        <h1 className="text-4xl font-semibold my-5">Add a Book</h1>
       </div>
       <form onSubmit={handleSubmit} className="my-5">
         <div>

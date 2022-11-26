@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import useToken from "../../Hooks/useToken";
 import SocialLogin from "./SocialLogin";
@@ -9,10 +9,13 @@ const Login = () => {
   const { user, SignInUser } = useContext(AuthContext);
   const [userEmail, setUserEmail] = useState('');
   const [token]=useToken(userEmail);
+  const location = useLocation();
   const navigate = useNavigate();
 
-  if(user?.email && token){
-    navigate('/');
+  const from = location.state?.from?.pathname || "/";
+
+  if(token || user){
+    navigate(from, {replace: true});
   }
 
   const handleSubmit = (e) =>{
@@ -28,6 +31,7 @@ const Login = () => {
         // console.log(data);
         setUserEmail(email);
         console.log(email);
+        navigate(from, {replace: true});
     })
     .catch(e=>{
         setError(e.message)

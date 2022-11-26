@@ -21,7 +21,6 @@ const PrivateRoute = ({children}) => {
             state = {{from: location}}
             replace
         >
-
         </Navigate>
     );
 };

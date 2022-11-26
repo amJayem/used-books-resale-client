@@ -23,25 +23,49 @@ const MyProducts = () => {
     },
   });
 
-  if(isLoading){
+  if (isLoading) {
     return Loader();
   }
 
-  const handleDelete = id =>{
-    axios.delete(`http://localhost:5000/books/${id}`)
-    .then(result => {
+  //   console.log(myProducts);
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/books/${id}`)
+      .then((result) => {
         // console.log(result);
-        toast.success("Delete Success")
+        toast.success("Delete Success");
         refetch();
-    })
-    .catch(e =>{
-        console.error('delete error => ',e);
-    })
-  }
+      })
+      .catch((e) => {
+        console.error("delete error => ", e);
+      });
+  };
+
+  const handleStatus = (id, status) => {
+    if (status === "available") status = "sold";
+    else status = "available";
+    console.log(id, status);
+
+    axios
+      .patch(`http://localhost:5000/book/status/${id}`, { status })
+      .then((res) => {
+        // console.log(res);
+        if (res.data.acknowledged) {
+          toast.success("status updated");
+        }
+        refetch();
+      })
+      .catch((e) => {
+        console.error("status error => ", e);
+      });
+  };
 
   return (
-    <div>
-      MyProducts
+    <div>      
+      <div>
+        <h1 className="text-4xl font-semibold my-5">MyProducts</h1>
+      </div>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -51,7 +75,8 @@ const MyProducts = () => {
               <th>Book Name</th>
               <th>Author</th>
               <th>category</th>
-              <th>Sales Status</th>
+              <th>Sales Status?</th>
+              <th>Advertise</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -62,7 +87,7 @@ const MyProducts = () => {
                 <th>
                   <div className="avatar">
                     <div className="w-24 rounded">
-                      <img src={myProduct.image} alt=''/>
+                      <img src={myProduct.image} alt="" />
                     </div>
                   </div>
                 </th>
@@ -70,13 +95,38 @@ const MyProducts = () => {
                 <td>{myProduct.author}</td>
                 <td>{myProduct.categoryId}</td>
                 <td>
-                  <select name="status" id="">
-                    <option value="available">Available</option>
-                    <option value="sold">Sold</option>
-                  </select>
+                  {myProduct.status !== "available" && (
+                    <button
+                      className="btn btn-success my-1 text-white w-full"
+                      onClick={() =>
+                        handleStatus(myProduct._id, myProduct.status)
+                      }
+                      value="available"
+                    >
+                    Make  Available
+                    </button>
+                  )}
+                  {myProduct.status !== "sold" && (
+                    <button
+                      className="btn btn-error w-full my-1 text-white"
+                      onClick={() =>
+                        handleStatus(myProduct._id, myProduct.status)
+                      }
+                      value="sold"
+                    >
+                      Sold out
+                    </button>
+                  )}
                 </td>
                 <td>
-                  <button onClick={()=>handleDelete(myProduct._id)} className="btn bg-red-600 text-white border-none">
+                    <button className="btn btn-secondary mr-1 text-white">Add</button>
+                    <button className="btn btn-primary text-white">Remove</button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => handleDelete(myProduct._id)}
+                    className="btn bg-red-600 text-white border-none"
+                  >
                     Delete
                   </button>
                 </td>
