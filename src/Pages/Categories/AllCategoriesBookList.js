@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AllCategoriesBookList = ({ cat }) => {
   const {
@@ -11,6 +12,7 @@ const AllCategoriesBookList = ({ cat }) => {
     location,
     phone,
     status,
+    _id,
   } = cat;
 
   return (
@@ -33,9 +35,7 @@ const AllCategoriesBookList = ({ cat }) => {
             <span className="font-semibold">Price: ${price}</span>
           </p>
           <p>
-            <span className="font-semibold">
-                Location: {location}
-                </span>
+            <span className="font-semibold">Location: {location}</span>
           </p>
           <p>
             <span className="font-semibold">Contact info: </span>
@@ -46,11 +46,27 @@ const AllCategoriesBookList = ({ cat }) => {
             {condition}
           </p>
           <p>
-            <span className="font-semibold">Status: </span>
-            {status}
+            {
+              status === 'sold' ?
+              <span className="text-error font-semibold">
+                Status: {status}
+              </span>
+              :
+              <span className="font-semibold text-success">
+                Status: {status}
+              </span>
+            }
           </p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+            {status === "sold" ? (
+              <Link className="btn" disabled>
+                Book Now
+              </Link>
+            ) : (
+              <Link to={`/book-now/${_id}`} className="btn btn-primary">
+                Book Now
+              </Link>
+            )}
           </div>
         </div>
       </div>

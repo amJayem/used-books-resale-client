@@ -13,7 +13,11 @@ const useRole = (email) => {
         })
         .then(result =>{
             // console.log(result.data.role.toLowerCase());
-            setRole(result.data.role.toLowerCase());
+            if(result.data.role)
+            {
+                setRole(result.data?.role.toLowerCase());
+            }
+            else setRole('buyer');
             setIsLoading(false);
         })
     },[email])

@@ -1,25 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import React, {  } from "react";
+import { useLoaderData,  } from "react-router-dom";
+import Loader from "../Shared/Loader/Loader";
 import AllCategoriesBookList from "./AllCategoriesBookList";
 
 const CategoriesById = () => {
-  const ctg = useLoaderData();
-  const { category, categoryId } = ctg;
 
-  const { data: ctgId } = useQuery({
+    const {category, categoryId} = useLoaderData();
+
+//   const categoryId = useParams();
+//   console.log(categoryId);
+
+  const { data: ctgId, refetch, isLoading } = useQuery({
     queryKey: ["categoryQuery"],
     queryFn: async () => {
       const res = await fetch(
         `http://localhost:5000/books/categoryId?id=${categoryId}`
       );
       const data = await res.json();
-
+            
       return data;
     },
   });
-
-//   console.log(ctgId);
+  
+  if(isLoading){
+    return Loader();
+  }
+  refetch();
 
   return (
     <div>

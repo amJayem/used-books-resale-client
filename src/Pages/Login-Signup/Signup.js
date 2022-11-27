@@ -66,7 +66,7 @@ const Signup = () => {
               })
                 .then((res) => res.json())
                 .then((data) => {
-                  console.log('db info: ',data);
+                  console.log("db info: ", data);
                 })
                 .catch((e) => {
                   console.error("storing user to db error => ", e);
@@ -102,15 +102,12 @@ const Signup = () => {
   };
   return (
     <div className="hero">
-      <form
-        onSubmit={handleSubmit(handleLogin)}
-        className="hero-content flex-col"
-      >
+      <div className="hero-content flex-col">
         <div className="text-center ">
           <h1 className="text-4xl font-semibold my-5">Create a new account!</h1>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <div className="card-body">
+          <form onSubmit={handleSubmit(handleLogin)} className="card-body">
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -193,14 +190,15 @@ const Signup = () => {
                 type="submit"
                 value="signup"
               />
-              <div className="divider"></div>
-              <div className="mx-auto my-0">
-                <SocialLogin />
-              </div>
             </div>
+          </form>
+          <div className="divider -mt-5"></div>
+          <div className="mx-auto mb-10">
+            <p className="mb-2 text-secondary text-xs">Sign in as a buyer</p>
+            <SocialLogin />
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

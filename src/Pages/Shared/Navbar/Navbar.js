@@ -32,7 +32,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li tabIndex={0}>
-        <Link className=" btn btn-outline bg-secondary text-white">
+        <Link to='/categories' className=" btn btn-outline bg-secondary text-white">
           Categories
         </Link>
         <ul className="p-2 bg-white">

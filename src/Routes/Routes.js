@@ -5,6 +5,7 @@ import Blogs from "../Pages/Blogs/Blogs";
 import Categories from "../Pages/Categories/Categories";
 import CategoriesById from "../Pages/Categories/CategoriesById";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import BookNow from "../Pages/Dashboard/BuyerDashboard/BookNow";
 import BuyerDashboard from "../Pages/Dashboard/BuyerDashboard/BuyerDashboard";
 import MyProducts from "../Pages/Dashboard/SellerDashboard/MyProducts";
 import SellerDashboard from "../Pages/Dashboard/SellerDashboard/SellerDashboard";
@@ -43,6 +44,10 @@ export const routes = createBrowserRouter([
         element: <CategoriesById />,
         loader: ({params})=>fetch(`http://localhost:5000/category/${params.id}`)
       },
+      {
+        path: '/book-now/:id',
+        element: <BookNow/>
+      }
     ],
   },
   {

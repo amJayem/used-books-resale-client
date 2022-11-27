@@ -13,7 +13,10 @@ const useToken = (email) => {
             localStorage.setItem("token", data.accessToken);
             setToken(data.accessToken);
           }
-        });
+        })
+        .catch(e=>{
+          console.error('token error => ',e);
+        })
     }
   }, [email]);
   return [token];
