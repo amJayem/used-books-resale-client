@@ -7,6 +7,7 @@ import CategoriesById from "../Pages/Categories/CategoriesById";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import BookNow from "../Pages/Dashboard/BuyerDashboard/BookNow";
 import BuyerDashboard from "../Pages/Dashboard/BuyerDashboard/BuyerDashboard";
+import Payment from "../Pages/Dashboard/BuyerDashboard/Payment";
 import MyProducts from "../Pages/Dashboard/SellerDashboard/MyProducts";
 import SellerDashboard from "../Pages/Dashboard/SellerDashboard/SellerDashboard";
 import Home from "../Pages/Home/Home";
@@ -59,6 +60,10 @@ export const routes = createBrowserRouter([
       {
         path: "/dashboard/buyer",
         element: <BuyerDashboard />,
+      },
+      {
+        path: "/dashboard/buyer/payment/:id",
+        element: <Payment />,
       },
       {
         path: "/dashboard/add-book",

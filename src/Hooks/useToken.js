@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 
 const useToken = (email) => {
     const [token, setToken] = useState('');
+    console.log('useToken email : ',email);
   useEffect(() => {
     if (email) {
       fetch(`http://localhost:5000/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
+          // console.log(object);
           console.log(data);
-          if (data.accessToken) {
+        if (data.accessToken) {
             console.log(data.accessToken);
             localStorage.setItem("token", data.accessToken);
             setToken(data.accessToken);

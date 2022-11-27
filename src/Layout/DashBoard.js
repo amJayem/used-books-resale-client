@@ -19,7 +19,7 @@ const DashBoard = () => {
       <DashboardNav />
       <div className="drawer drawer-mobile">
         <input id="dashboard" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center">
+        <div className="drawer-content flex flex-col lg:items-start sm:items-stretch md:items-center">
           <Outlet />
         </div>
         <div className="drawer-side">
