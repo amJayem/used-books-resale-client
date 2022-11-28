@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 const BuyerDashboard = () => {
   const { user } = useContext(AuthContext);
 
-  const { data: myOrders, isLoading } = useQuery({
+  const { data: myOrders, isLoading, refetch } = useQuery({
     queryKey: ["order"],
     queryFn: async () => {
       const res = await fetch(
@@ -23,6 +23,7 @@ const BuyerDashboard = () => {
   //   console.log(user);
 
   if (isLoading) {
+    refetch();
     return Loader();
   }
 

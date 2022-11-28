@@ -15,7 +15,7 @@ const CategoriesById = () => {
     queryKey: ["categoryQuery"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/books/categoryId?id=${categoryId}`
+        `https://12-book-shop-server.vercel.app/books/categoryId?id=${categoryId}`
       );
       const data = await res.json();
             

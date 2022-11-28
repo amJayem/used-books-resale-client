@@ -6,7 +6,7 @@ const AdvertiseItems = () => {
   const { data: adBooks } = useQuery({
     queryKey: ["ad"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/feature/books`);
+      const res = await fetch(`https://12-book-shop-server.vercel.app/feature/books`);
       const data = await res.json();
       return data;
     },

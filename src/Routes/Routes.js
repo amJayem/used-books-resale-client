@@ -46,7 +46,7 @@ export const routes = createBrowserRouter([
       {
         path: "/category/:id",
         element: <CategoriesById />,
-        loader: ({params})=>fetch(`http://localhost:5000/category/${params.id}`)
+        loader: ({params})=>fetch(`https://12-book-shop-server.vercel.app/category/${params.id}`)
       },
       {
         path: '/book-now/:id',
@@ -91,7 +91,7 @@ export const routes = createBrowserRouter([
       {
         path: "/dashboard/admin/all-buyer",
         element: <AllBuyer />,
-        // loader: ({params}) => fetch(`http://localhost:5000/all-buyers`)
+        // loader: ({params}) => fetch(`https://12-book-shop-server.vercel.app/all-buyers`)
       },
       {
         path: '*',

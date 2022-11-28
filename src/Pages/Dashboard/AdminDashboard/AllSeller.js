@@ -8,7 +8,7 @@ const AllSeller = () => {
   const { data: allSellers, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/all-sellers`);
+      const res = await fetch(`https://12-book-shop-server.vercel.app/all-sellers`);
       const data = await res.json();
 
       return data;
@@ -20,7 +20,7 @@ const AllSeller = () => {
     const confirm = window.confirm("Do you want to delete buyer");
     if (confirm) {
       axios
-        .delete(`http://localhost:5000/delete/user/${id}`)
+        .delete(`https://12-book-shop-server.vercel.app/delete/user/${id}`)
         .then((data) => {
           // console.log(data);
           if (data.data.status === 200) {
@@ -37,7 +37,7 @@ const AllSeller = () => {
   const handleVerify = (id) => {
     const status = 0;
     axios
-      .patch(`http://localhost:5000/seller/status/${id}`, { status })
+      .patch(`https://12-book-shop-server.vercel.app/seller/status/${id}`, { status })
       .then((res) => {
         // console.log(res);
         if (res.data.acknowledged) {

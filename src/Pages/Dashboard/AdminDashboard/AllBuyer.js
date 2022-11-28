@@ -8,7 +8,7 @@ const AllBuyer = () => {
   const { data: allBuyers, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/all-buyers`);
+      const res = await fetch(`https://12-book-shop-server.vercel.app/all-buyers`);
       const data = await res.json();
 
       return data;
@@ -21,7 +21,7 @@ const AllBuyer = () => {
     const confirm = window.confirm("Do you want to delete buyer");
     if (confirm) {
       axios
-        .delete(`http://localhost:5000/delete/user/${id}`)
+        .delete(`https://12-book-shop-server.vercel.app/delete/user/${id}`)
         .then((data) => {
           // console.log(data);
           if (data.data.status === 200) {

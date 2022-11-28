@@ -21,7 +21,7 @@ const SocialLogin = () => {
           };
 
           // storing social login user to db as a buyer
-          fetch("http://localhost:5000/users", {
+          fetch("https://12-book-shop-server.vercel.app/users", {
                 method: "post",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(userForDB),

@@ -6,7 +6,7 @@ const useToken = (email) => {
     // console.log('useToken email : ',email);
   useEffect(() => {
     if (email !== undefined) {
-      fetch(`http://localhost:5000/jwt?email=${email}`)
+      fetch(`https://12-book-shop-server.vercel.app/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

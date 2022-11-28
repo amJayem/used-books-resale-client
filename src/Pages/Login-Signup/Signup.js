@@ -70,7 +70,7 @@ const Signup = () => {
               };
 
               // user storing to db
-              fetch("http://localhost:5000/users", {
+              fetch("https://12-book-shop-server.vercel.app/users", {
                 method: "post",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(userForDB),

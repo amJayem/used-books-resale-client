@@ -6,7 +6,7 @@ const useRole = (email) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/user?email=${email}`,{
+        axios.get(`https://12-book-shop-server.vercel.app/user?email=${email}`,{
             // headers:{
             //     authorization: `bearer ${localStorage.getItem('token')}`
             // }

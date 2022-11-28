@@ -43,7 +43,7 @@ const CheckoutForm = ({myOrderId}) => {
       console.log('[PaymentMethod]', paymentMethod.id);
       if(paymentMethod.id){
         toast.success("Payment successful");
-        axios.patch(`http://localhost:5000/buyer-orders/success/${myOrderId}`)
+        axios.patch(`https://12-book-shop-server.vercel.app/buyer-orders/success/${myOrderId}`)
         .then(data=>{
           if(data.data.acknowledged){
             navigate('/dashboard/buyer');

@@ -17,7 +17,7 @@ const MyProducts = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/books?email=${user?.email}`
+        `https://12-book-shop-server.vercel.app/books?email=${user?.email}`
       );
       const data = res.json();
       return data;
@@ -31,7 +31,7 @@ const MyProducts = () => {
   // seller can delete their product
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5000/books/${id}`)
+      .delete(`https://12-book-shop-server.vercel.app/books/${id}`)
       .then((result) => {
         // console.log(result);
         toast.success("Delete Success");
@@ -49,7 +49,7 @@ const MyProducts = () => {
     // console.log(id, status);
 
     axios
-      .patch(`http://localhost:5000/book/status/${id}`, { status })
+      .patch(`https://12-book-shop-server.vercel.app/book/status/${id}`, { status })
       .then((res) => {
         // console.log(res);
         if (res.data.acknowledged) {
@@ -65,7 +65,7 @@ const MyProducts = () => {
   //seller can add product for advertise
   const handleAddAdvertise = (id) =>{
     axios
-      .patch(`http://localhost:5000/book/feature/${id}`)
+      .patch(`https://12-book-shop-server.vercel.app/book/feature/${id}`)
       .then((res) => {
         console.log(res);
         if (res.data.acknowledged) {
@@ -81,7 +81,7 @@ const MyProducts = () => {
   //seller can remove product from advertise
   const handleRemoveAdvertise = (id) =>{
     axios
-      .patch(`http://localhost:5000/book/feature/remove/${id}`)
+      .patch(`https://12-book-shop-server.vercel.app/book/feature/remove/${id}`)
       .then((res) => {
         console.log(res);
         if (res.data.acknowledged) {

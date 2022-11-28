@@ -34,7 +34,7 @@ const SellerDashboard = () => {
           const image = data.data.display_url;
 
           axios
-            .post(`http://localhost:5000/books`, {
+            .post(`https://12-book-shop-server.vercel.app/books`, {
               book: form.book.value,
               author: form.author.value,
               price: form.price.value,

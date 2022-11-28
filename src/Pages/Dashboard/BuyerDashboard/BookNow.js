@@ -15,7 +15,7 @@ const BookNow = () => {
   const { data: books, isLoading } = useQuery({
     queryKey: ["books"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/book/${id}`);
+      const res = await fetch(`https://12-book-shop-server.vercel.app/book/${id}`);
       const data = await res.json();
 
       return data;
@@ -25,7 +25,7 @@ const BookNow = () => {
   const {data: seller} = useQuery({
     queryKey: ['user'],
     queryFn: async ()=> {
-      const res = await fetch(`http://localhost:5000/seller/verified/${books?.addedBy}`);
+      const res = await fetch(`https://12-book-shop-server.vercel.app/seller/verified/${books?.addedBy}`);
       const data = await res.json();
 
       return data;
@@ -59,7 +59,7 @@ const BookNow = () => {
 
     // console.log(bookInfo);
 
-    fetch(`http://localhost:5000/buyer-orders`,{
+    fetch(`https://12-book-shop-server.vercel.app/buyer-orders`,{
         method: 'post',
         headers: { 'content-type': 'application/json'},
         body: JSON.stringify(bookInfo)
