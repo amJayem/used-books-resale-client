@@ -15,4 +15,4 @@ In this app:
 -   Signing with google user will be counted as a buyer
 
 -   adminEmail: <admin@bookshop.com>
--   adminPassword: <123456>
+-   adminPassword: 123456
