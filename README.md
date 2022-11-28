@@ -13,3 +13,6 @@ In this app:
 -   buyer can book a product and can purchase or cancel from the buyer dashboard
 -   Admin can see all buyers, sellers and can take actions
 -   Signing with google user will be counted as a buyer
+
+-   adminEmail: <admin@bookshop.com>
+-   adminPassword: <123456>
