@@ -4,13 +4,13 @@ import toast from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 import Loader from "../../Shared/Loader/Loader";
+import { FcOk } from "react-icons/fc";
 
 const BookNow = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate()
   const bookId = useParams();
   const id = bookId.id;
-  // console.log(bookId.id);
 
   const { data: books, isLoading } = useQuery({
     queryKey: ["books"],
@@ -22,7 +22,19 @@ const BookNow = () => {
     },
   });
 
-//   console.log(books);
+  const {data: seller} = useQuery({
+    queryKey: ['user'],
+    queryFn: async ()=> {
+      const res = await fetch(`http://localhost:5000/seller/verified/${books?.addedBy}`);
+      const data = await res.json();
+
+      return data;
+    }
+  });
+  
+  if (isLoading) {
+    return Loader();
+  }
 
   const handleBooking = (e) =>{
     e.preventDefault();
@@ -63,10 +75,6 @@ const BookNow = () => {
     .catch(e=>{
         console.error('booking error => ',e);
     })
-  }
-
-  if (isLoading) {
-    return Loader();
   }
 
   return (
@@ -121,6 +129,18 @@ const BookNow = () => {
             name="price"
             disabled
             defaultValue={books?.price}
+            className="input input-bordered w-full"
+          />
+        </div>
+        <div>
+          <label className="label">
+            <span className="label-text-alt">Seller Email</span>{seller?.status  && <FcOk/>}
+          </label>
+          <input
+            type="text"
+            name="sellerPhone"
+            disabled
+            defaultValue={books?.addedBy}
             className="input input-bordered w-full"
           />
         </div>

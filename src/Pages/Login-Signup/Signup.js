@@ -8,7 +8,7 @@ import Loader from "../Shared/Loader/Loader";
 import SocialLogin from "./SocialLogin";
 
 const Signup = () => {
-  const { user, loading, SignUpUser, updateUserProfile } = useContext(AuthContext);
+  const { user, loading, setLoading, SignUpUser, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [token] = useToken(user?.email);
   const roles = ["buyer", "seller"];
@@ -82,6 +82,7 @@ const Signup = () => {
                 .catch((e) => {
                   console.error("storing user to db error => ", e);
                   setError(e.message);
+                  setLoading(false);
                 });
               setError("");
 
@@ -93,6 +94,7 @@ const Signup = () => {
                 })
                 .catch((e) => {
                   setError(e.message);
+                  setLoading(false);
                   console.error("update error => ", e);
                 });
               setError("");
@@ -100,6 +102,7 @@ const Signup = () => {
             .catch((e) => {
               console.error("signup error => ", e);
               setError(e.message);
+              setLoading(false);
             });
           setError("");
         }
@@ -107,6 +110,7 @@ const Signup = () => {
       })
       .catch((e) => {
         setError(e.message);
+        setLoading(false);
         console.error("img upload error => ", e);
       });
     setError("");

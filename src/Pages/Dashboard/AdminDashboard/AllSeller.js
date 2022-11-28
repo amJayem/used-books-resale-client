@@ -34,7 +34,7 @@ const AllSeller = () => {
     }
   };
 
-  const handleVerify = id =>{
+  const handleVerify = (id) => {
     const status = 0;
     axios
       .patch(`http://localhost:5000/seller/status/${id}`, { status })
@@ -48,7 +48,7 @@ const AllSeller = () => {
       .catch((e) => {
         console.error("status error => ", e);
       });
-  }
+  };
 
   return (
     <div>
@@ -73,7 +73,21 @@ const AllSeller = () => {
                   <td>{allSeller.name}</td>
                   <td>{allSeller.email}</td>
                   <td>
-                    <Link onClick={()=>handleVerify(allSeller._id)} className="btn btn-success text-white">Verify</Link>
+                    {allSeller.status !== "verified" ? (
+                      <Link
+                        onClick={() => handleVerify(allSeller._id)}
+                        className="btn btn-success text-white"
+                      >
+                        Verify
+                      </Link>
+                    ) : (
+                      <Link
+                        className="btn btn-success text-white"
+                      >
+                        verified
+                      </Link>
+                    )}
+
                     <Link
                       onClick={() => handleDeleteSeller(allSeller._id)}
                       className="btn btn-error ml-1 text-white"
