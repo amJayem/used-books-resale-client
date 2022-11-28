@@ -61,9 +61,10 @@ const BuyerDashboard = () => {
                   <td>
                     {
                       myOrder.payment === true ?
-                      <Link to={`/dashboard/buyer/payment/${myOrder._id}`} className="btn btn-secondary btn-sm text-white">Pay</Link>
-                      :
+                      
                       <Link className="btn btn-primary btn-sm text-white">Paid</Link>
+                      :
+                      <Link to={`/dashboard/buyer/payment/${myOrder._id}`} className="btn btn-secondary btn-sm text-white">Pay</Link>
                     }
                   </td>
                   <td>

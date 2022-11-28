@@ -2,18 +2,23 @@ import { useEffect, useState } from "react";
 
 const useToken = (email) => {
     const [token, setToken] = useState('');
-    console.log('useToken email : ',email);
+    const [tokenLoading, setTokenLoading] = useState(true);
+    // console.log('useToken email : ',email);
   useEffect(() => {
-    if (email) {
+    if (email !== undefined) {
       fetch(`http://localhost:5000/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log(object);
           console.log(data);
-        if (data.accessToken) {
-            console.log(data.accessToken);
+        if (data.accessToken !== 'forbidden') {
+            // console.log('token => ',data.accessToken);
             localStorage.setItem("token", data.accessToken);
             setToken(data.accessToken);
+            setTokenLoading(false);
+          }
+          else{
+            localStorage.setItem("token",'user deleted by admin');
+            setTokenLoading(false);
           }
         })
         .catch(e=>{
@@ -21,7 +26,7 @@ const useToken = (email) => {
         })
     }
   }, [email]);
-  return [token];
+  return [token,tokenLoading];
 };
 
 export default useToken;

@@ -1,22 +1,32 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import useToken from "../../Hooks/useToken";
+import Loader from "../Shared/Loader/Loader";
 import SocialLogin from "./SocialLogin";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const { user, SignInUser } = useContext(AuthContext);
-  const [userEmail, setUserEmail] = useState("");
-  const [token] = useToken(userEmail);
+  const { user, loading, setLoading, SignInUser } = useContext(AuthContext);
+  // const [userEmail, setUserEmail] = useState("");
+  const [token] = useToken(user?.email);
   const location = useLocation();
   const navigate = useNavigate();
 
   const from = location.state?.from?.pathname || "/";
 
-  if (token || user) {
-    navigate(from, { replace: true });
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [from, navigate, token]);
+
+  if(loading){
+    return Loader();
   }
+
+  console.log({user});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,15 +39,17 @@ const Login = () => {
     SignInUser(email, password)
       .then((data) => {
         // console.log(data);
-        setUserEmail(email);
-        console.log(email);
-        navigate(from, { replace: true });
+        // setUserEmail(email);
+        toast.success("User login success");
+        // navigate(from, { replace: true });
       })
       .catch((e) => {
         setError(e.message);
+        setLoading(false);
         console.error("sign in error => ", e);
       });
   };
+
 
   return (
     <div>

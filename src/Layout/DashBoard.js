@@ -5,13 +5,12 @@ import useRole from "../Hooks/useRole";
 import DashboardNav from "../Pages/Dashboard/DashboardNav";
 import Loader from "../Pages/Shared/Loader/Loader";
 
-
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
   console.log();
   const [role, isLoading] = useRole(user?.email);
 
-  if(isLoading){
+  if (isLoading) {
     return Loader();
   }
   return (
@@ -27,23 +26,23 @@ const DashBoard = () => {
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
-              {role === "buyer" && 
-              <>
-              <Link to='/dashboard/buyer'>My Orders</Link>
-              </>
-              }
-              {role === "seller" && <>
-              <Link to='/dashboard/add-book'>Add Book</Link>
-              <Link to='/dashboard/my-products'>My products</Link>
-              </>
-              }
-              {
-                role === 'admin' &&
+              {role === "buyer" && (
                 <>
-                  <Link to='dashboard/admin/'>All Seller</Link>
-                  <Link to='dashboard/admin/'>All Buyer</Link>
+                  <Link to="/dashboard/buyer">My Orders</Link>
                 </>
-              }
+              )}
+              {role === "seller" && (
+                <>
+                  <Link to="/dashboard/add-book">Add Book</Link>
+                  <Link to="/dashboard/my-products">My products</Link>
+                </>
+              )}
+              {role === "admin" && (
+                <>
+                  <Link to="/dashboard/admin/all-seller">All Seller</Link>
+                  <Link to="/dashboard/admin/all-buyer">All Buyer</Link>
+                </>
+              )}
             </li>
           </ul>
         </div>

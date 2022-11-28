@@ -1,13 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import useToken from "../../Hooks/useToken";
+import Loader from "../Shared/Loader/Loader";
 import SocialLogin from "./SocialLogin";
 
 const Signup = () => {
-  const { user, SignUpUser, updateUserProfile } = useContext(AuthContext);
+  const { user, loading, SignUpUser, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const [token] = useToken(user?.email);
+  const roles = ["buyer", "seller"];
+  // const [userEmail, setUserEmail] = useState("");
   const {
     register,
     handleSubmit,
@@ -15,11 +20,15 @@ const Signup = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  if (user?.email) {
-    navigate("/");
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate, token]);
+  
+  if(loading){
+    return Loader();
   }
-
-  const roles = ["Buyer", "Seller"];
 
   const imgHostingKey = process.env.REACT_APP_IMGBB_KEY;
 
@@ -29,7 +38,9 @@ const Signup = () => {
     const password = form.password;
     const image = form.image[0];
     const role = form.role;
-    console.log(image, name, email, password);
+    // console.log(image, name, email, password);
+
+    // setUserEmail(email);
 
     const formData = new FormData();
     formData.append("image", image);
@@ -66,7 +77,7 @@ const Signup = () => {
               })
                 .then((res) => res.json())
                 .then((data) => {
-                  console.log("db info: ", data);
+                  // console.log("db info: ", data);
                 })
                 .catch((e) => {
                   console.error("storing user to db error => ", e);
@@ -163,7 +174,7 @@ const Signup = () => {
                 <option disabled>Please Select a Role</option>
                 {roles.map((role, i) => (
                   <option
-                    key={role.i}
+                    key={i}
                     // value={role.name}
                   >
                     {role}

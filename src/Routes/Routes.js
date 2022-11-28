@@ -5,6 +5,8 @@ import Blogs from "../Pages/Blogs/Blogs";
 import Categories from "../Pages/Categories/Categories";
 import CategoriesById from "../Pages/Categories/CategoriesById";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import AllBuyer from "../Pages/Dashboard/AdminDashboard/AllBuyer";
+import AllSeller from "../Pages/Dashboard/AdminDashboard/AllSeller";
 import BookNow from "../Pages/Dashboard/BuyerDashboard/BookNow";
 import BuyerDashboard from "../Pages/Dashboard/BuyerDashboard/BuyerDashboard";
 import Payment from "../Pages/Dashboard/BuyerDashboard/Payment";
@@ -13,6 +15,7 @@ import SellerDashboard from "../Pages/Dashboard/SellerDashboard/SellerDashboard"
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login-Signup/Login";
 import Signup from "../Pages/Login-Signup/Signup";
+import ErrorPage from "../Pages/Shared/Error/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 
 export const routes = createBrowserRouter([
@@ -48,6 +51,10 @@ export const routes = createBrowserRouter([
       {
         path: '/book-now/:id',
         element: <BookNow/>
+      },
+      {
+        path: '*',
+        element: <ErrorPage/>
       }
     ],
   },
@@ -77,6 +84,19 @@ export const routes = createBrowserRouter([
         path: "/dashboard/admin",
         element: <AdminDashboard />,
       },
+      {
+        path: "/dashboard/admin/all-seller",
+        element: <AllSeller />,
+      },
+      {
+        path: "/dashboard/admin/all-buyer",
+        element: <AllBuyer />,
+        // loader: ({params}) => fetch(`http://localhost:5000/all-buyers`)
+      },
+      {
+        path: '*',
+        element: <ErrorPage/>
+      }
     ],
   },
 ]);
