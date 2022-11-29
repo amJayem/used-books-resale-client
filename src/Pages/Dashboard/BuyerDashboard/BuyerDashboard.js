@@ -47,7 +47,7 @@ const BuyerDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {myOrders?.map((myOrder, i) => (
+              { myOrders.length && myOrders?.map((myOrder, i) => (
                 <tr key={i}>
                   <th>{i + 1}</th>
                   <td className="w-56">
@@ -69,7 +69,8 @@ const BuyerDashboard = () => {
                     }
                   </td>
                   <td>
-                    <Link className="btn btn-primary btn-sm text-white">Cancel</Link>
+                    <Link className="btn btn-error btn-sm text-white">Cancel</Link> <br />
+                    <Link className="btn btn-warning btn-sm text-white mt-1">Report</Link>
                   </td>
                 </tr>
               ))}

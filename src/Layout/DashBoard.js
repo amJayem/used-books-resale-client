@@ -41,6 +41,7 @@ const DashBoard = () => {
                 <>
                   <Link to="/dashboard/admin/all-seller">All Seller</Link>
                   <Link to="/dashboard/admin/all-buyer">All Buyer</Link>
+                  <Link to="/dashboard/admin/reported-items">Reported Items</Link>
                 </>
               )}
             </li>

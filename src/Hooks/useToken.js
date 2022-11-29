@@ -16,10 +16,10 @@ const useToken = (email) => {
             setToken(data.accessToken);
             setTokenLoading(false);
           }
-          else{
-            localStorage.setItem("token",'user deleted by admin');
-            setTokenLoading(false);
-          }
+          // else{
+          //   localStorage.setItem("token",'user deleted by admin');
+          //   setTokenLoading(false);
+          // }
         })
         .catch(e=>{
           console.error('token error => ',e);

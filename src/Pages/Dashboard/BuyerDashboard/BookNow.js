@@ -47,11 +47,12 @@ const BookNow = () => {
     const buyerPhone = form.buyerPhone.value;
     const sellerLoc = form.sellerLoc.value;
     const buyerLoc = form.buyerLoc.value;
+    const report = form.report.value;
     const image = books.image;
 
     const bookInfo = {
         buyer, buyerEmail, book, price, sellerPhone,
-        buyerPhone, sellerLoc, buyerLoc, image,
+        buyerPhone, sellerLoc, buyerLoc, report, image,
         status: books.status,
         categoryId: books.categoryId,
         sellerEmail: books.addedBy,
@@ -188,6 +189,18 @@ const BookNow = () => {
             type="text"
             name="buyerLoc"
             placeholder="Where do you want to meet"
+            className="input input-bordered w-full"
+          />}
+        </div>
+        <div>
+          <label className="label">
+            <span className="label-text-alt">Report to admin</span>
+          </label>
+          {
+            <input
+            type="text"
+            name="report"
+            placeholder="type report"
             className="input input-bordered w-full"
           />}
         </div>

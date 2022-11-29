@@ -8,6 +8,7 @@ const AllCategoriesBookList = ({ cat }) => {
     price,
     description,
     condition,
+    years,
     image,
     location,
     phone,
@@ -28,11 +29,12 @@ const AllCategoriesBookList = ({ cat }) => {
             {author}
           </p>
           <p>
-            <span className="font-semibold">Descp:</span>
+            <span className="font-semibold">Description:</span>
             {description}
           </p>
           <p>
-            <span className="font-semibold">Price: ${price}</span>
+            <span className="font-semibold">Resale Price: ${price}</span> <br />
+            <span>Original Price: $500</span>
           </p>
           <p>
             <span className="font-semibold">Location: {location}</span>
@@ -45,6 +47,10 @@ const AllCategoriesBookList = ({ cat }) => {
             <span className="font-semibold">Condition: </span>
             {condition}
           </p>
+          {cat.years && <p>
+            <span className="font-semibold">Buying years: </span>
+            {years}
+          </p>}
           <p>
             {
               status === 'sold' ?

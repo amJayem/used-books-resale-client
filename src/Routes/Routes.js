@@ -7,6 +7,7 @@ import CategoriesById from "../Pages/Categories/CategoriesById";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import AllBuyer from "../Pages/Dashboard/AdminDashboard/AllBuyer";
 import AllSeller from "../Pages/Dashboard/AdminDashboard/AllSeller";
+import ReportedItems from "../Pages/Dashboard/AdminDashboard/ReportedItems";
 import BookNow from "../Pages/Dashboard/BuyerDashboard/BookNow";
 import BuyerDashboard from "../Pages/Dashboard/BuyerDashboard/BuyerDashboard";
 import Payment from "../Pages/Dashboard/BuyerDashboard/Payment";
@@ -45,24 +46,31 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/category/:id",
-        element: <CategoriesById />,
-        loader: ({params})=>fetch(`https://12-book-shop-server.vercel.app/category/${params.id}`)
+        element: (
+          <PrivateRoute>
+            <CategoriesById />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://12-book-shop-server.vercel.app/category/${params.id}`),
       },
       {
-        path: '/book-now/:id',
-        element: <BookNow/>
+        path: "/book-now/:id",
+        element: <BookNow />,
       },
       {
-        path: '*',
-        element: <ErrorPage/>
-      }
+        path: "*",
+        element: <ErrorPage />,
+      },
     ],
   },
   {
-    path: "/dashboard", 
-    element: <PrivateRoute>
-      <DashBoard />
-      </PrivateRoute>,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashBoard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/buyer",
@@ -94,9 +102,13 @@ export const routes = createBrowserRouter([
         // loader: ({params}) => fetch(`https://12-book-shop-server.vercel.app/all-buyers`)
       },
       {
-        path: '*',
-        element: <ErrorPage/>
-      }
+        path: "/dashboard/admin/reported-items",
+        element: <ReportedItems />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
+      },
     ],
   },
 ]);

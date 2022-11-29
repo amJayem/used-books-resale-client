@@ -39,6 +39,7 @@ const SellerDashboard = () => {
               author: form.author.value,
               price: form.price.value,
               condition: form.condition.value,
+              years: form.years.value,
               phone: form.phone.value,
               location: form.location.value,
               description: form.description.value,
@@ -121,6 +122,17 @@ const SellerDashboard = () => {
               </option>
             ))}
           </select>
+        </div>
+        <div>
+          <label className="label">
+            <span className="label-text">Buying years</span>
+          </label>
+          <input
+            type="text"
+            name="years"
+            placeholder="Your phone no"
+            className="input input-bordered w-80"
+          />
         </div>
         <div>
           <label className="label">
