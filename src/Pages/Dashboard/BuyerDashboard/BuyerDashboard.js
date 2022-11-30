@@ -2,16 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../../Context/AuthProvider";
 import Loader from "../../Shared/Loader/Loader";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const BuyerDashboard = () => {
   const { user } = useContext(AuthContext);
 
-  const { data: myOrders, isLoading, refetch } = useQuery({
+  const {
+    data: myOrders,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["order"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/buyer-orders?email=${user?.email}`
+        `https://12-book-shop-server.vercel.app/buyer-orders?email=${user?.email}`
       );
       const data = await res.json();
 
@@ -47,33 +51,41 @@ const BuyerDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              { myOrders.length && myOrders?.map((myOrder, i) => (
-                <tr key={i}>
-                  <th>{i + 1}</th>
-                  <td className="w-56">
-                    <img className="rounded-lg" src={myOrder.image} alt="" />
-                  </td>
-                  <td>{myOrder.book}</td>
-                  <td>{myOrder.price}</td>
-                  <td>
-                    <p>{myOrder.sellerEmail}</p>
-                    <p>{myOrder.sellerPhone}</p>
-                  </td>
-                  <td>
-                    {
-                      myOrder.payment === true ?
-                      
-                      <Link className="btn btn-primary btn-sm text-white">Paid</Link>
-                      :
-                      <Link to={`/dashboard/buyer/payment/${myOrder._id}`} className="btn btn-secondary btn-sm text-white">Pay</Link>
-                    }
-                  </td>
-                  <td>
-                    <Link className="btn btn-error btn-sm text-white">Cancel</Link> <br />
-                    <Link className="btn btn-warning btn-sm text-white mt-1">Report</Link>
-                  </td>
-                </tr>
-              ))}
+              {myOrders.length &&
+                myOrders?.map((myOrder, i) => (
+                  <tr key={i}>
+                    <th>{i + 1}</th>
+                    <td className="w-56">
+                      <img className="rounded-lg" src={myOrder.image} alt="" />
+                    </td>
+                    <td>{myOrder.book}</td>
+                    <td>{myOrder.price}</td>
+                    <td>
+                      <p>{myOrder.sellerEmail}</p>
+                      <p>{myOrder.sellerPhone}</p>
+                    </td>
+                    <td>
+                      {myOrder.payment === true ? (
+                        <Link className="btn btn-primary btn-sm text-white">
+                          Paid
+                        </Link>
+                      ) : (
+                        <Link
+                          to={`/dashboard/buyer/payment/${myOrder._id}`}
+                          className="btn btn-secondary btn-sm text-white"
+                        >
+                          Pay
+                        </Link>
+                      )}
+                    </td>
+                    <td>
+                      <Link className="btn btn-error btn-sm text-white">
+                        Cancel
+                      </Link>{" "}
+                      <br />
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

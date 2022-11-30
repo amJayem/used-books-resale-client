@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 const useToken = (email) => {
     const [token, setToken] = useState('');
     const [tokenLoading, setTokenLoading] = useState(true);
-    // console.log('useToken email : ',email);
-  useEffect(() => {
-    if (email !== undefined) {
+    useEffect(() => {
+    console.log('useToken email : ',email);
+    if (email) {
       fetch(`https://12-book-shop-server.vercel.app/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {

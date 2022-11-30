@@ -8,35 +8,40 @@ import { FcOk } from "react-icons/fc";
 
 const BookNow = () => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const bookId = useParams();
   const id = bookId.id;
+  const reports = ["ok", "report"];
 
   const { data: books, isLoading } = useQuery({
     queryKey: ["books"],
     queryFn: async () => {
-      const res = await fetch(`https://12-book-shop-server.vercel.app/book/${id}`);
+      const res = await fetch(
+        `https://12-book-shop-server.vercel.app/book/${id}`
+      );
       const data = await res.json();
 
       return data;
     },
   });
 
-  const {data: seller} = useQuery({
-    queryKey: ['user'],
-    queryFn: async ()=> {
-      const res = await fetch(`https://12-book-shop-server.vercel.app/seller/verified/${books?.addedBy}`);
+  const { data: seller } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://12-book-shop-server.vercel.app/seller/verified/${books?.addedBy}`
+      );
       const data = await res.json();
 
       return data;
-    }
+    },
   });
-  
+
   if (isLoading) {
     return Loader();
   }
 
-  const handleBooking = (e) =>{
+  const handleBooking = (e) => {
     e.preventDefault();
     const form = e.target;
     const buyer = form.buyer.value;
@@ -51,39 +56,54 @@ const BookNow = () => {
     const image = books.image;
 
     const bookInfo = {
-        buyer, buyerEmail, book, price, sellerPhone,
-        buyerPhone, sellerLoc, buyerLoc, report, image,
-        status: books.status,
-        categoryId: books.categoryId,
-        sellerEmail: books.addedBy,
-    }
+      buyer,
+      buyerEmail,
+      book,
+      price,
+      sellerPhone,
+      buyerPhone,
+      sellerLoc,
+      buyerLoc,
+      report,
+      image,
+      status: books.status,
+      categoryId: books.categoryId,
+      sellerEmail: books.addedBy,
+    };
 
-    // console.log(bookInfo);
+    console.log(bookInfo);
 
-    fetch(`https://12-book-shop-server.vercel.app/buyer-orders`,{
-        method: 'post',
-        headers: { 'content-type': 'application/json'},
-        body: JSON.stringify(bookInfo)
+    fetch(`https://12-book-shop-server.vercel.app/buyer-orders`, {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(bookInfo),
     })
-    .then(res=>res.json())
-    .then(data=>{
+      .then((res) => res.json())
+      .then((data) => {
         // console.log(data);
-        if(data.acknowledged){
-            navigate('/dashboard/buyer');
-            toast.success("This item is booked");
+        if (data.acknowledged) {
+          navigate("/dashboard/buyer");
+          toast.success("This item is booked");
         }
-    })
-    .catch(e=>{
-        console.error('booking error => ',e);
-    })
-  }
+      })
+      .catch((e) => {
+        console.error("booking error => ", e);
+      });
+  };
 
   return (
     <div>
-      <form onSubmit={handleBooking} className="grid grid-cols-1 justify-items-center">
+      <form
+        onSubmit={handleBooking}
+        className="grid grid-cols-1 justify-items-center"
+      >
         <h1> Book Now!</h1>
         <div className="w-72">
-            <img className="rounded-lg shadow-lg my-5" src={books?.image} alt="" />
+          <img
+            className="rounded-lg shadow-lg my-5"
+            src={books?.image}
+            alt=""
+          />
         </div>
         <div>
           <label className="label">
@@ -135,7 +155,8 @@ const BookNow = () => {
         </div>
         <div>
           <label className="label">
-            <span className="label-text-alt">Seller Email</span>{seller?.status  && <FcOk/>}
+            <span className="label-text-alt">Seller Email</span>
+            {seller?.status && <FcOk />}
           </label>
           <input
             type="text"
@@ -186,28 +207,39 @@ const BookNow = () => {
           </label>
           {
             <input
-            type="text"
-            name="buyerLoc"
-            placeholder="Where do you want to meet"
-            className="input input-bordered w-full"
-          />}
+              type="text"
+              name="buyerLoc"
+              placeholder="Where do you want to meet"
+              className="input input-bordered w-full"
+            />
+          }
         </div>
-        <div>
+        {/* report */}
+        <div className="">
           <label className="label">
-            <span className="label-text-alt">Report to admin</span>
+            <span className="label-text-alt">Report</span>
           </label>
-          {
-            <input
-            type="text"
+          <select
+          
+            className="input select select-bordered "
             name="report"
-            placeholder="type report"
-            className="input input-bordered w-full"
-          />}
+            type="text"
+          >
+            <option disabled>Please Select a Role</option>
+            {reports.map((report, i) => (
+              <option
+                key={i}
+                // value={role.name}
+              >
+                {report}
+              </option>
+            ))}
+          </select>
         </div>
         <input
-            type="submit"
-            className="btn btn-secondary text-white my-5 w-full max-w-xs"
-          />
+          type="submit"
+          className="btn btn-secondary text-white my-5 w-full max-w-xs"
+        />
       </form>
     </div>
   );

@@ -10,9 +10,9 @@ import SocialLogin from "./SocialLogin";
 const Signup = () => {
   const { user, loading, setLoading, SignUpUser, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [token] = useToken(user?.email);
   const roles = ["buyer", "seller"];
-  // const [userEmail, setUserEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [token] = useToken(userEmail);
   const {
     register,
     handleSubmit,
@@ -77,7 +77,9 @@ const Signup = () => {
               })
                 .then((res) => res.json())
                 .then((data) => {
-                  // console.log("db info: ", data);
+                  console.log("db info: ", data);
+                  console.log('email: ',email);
+                  setUserEmail(email);
                 })
                 .catch((e) => {
                   console.error("storing user to db error => ", e);
