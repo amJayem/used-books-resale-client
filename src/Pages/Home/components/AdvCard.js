@@ -6,8 +6,8 @@ const AdvCard = ({ adBook }) => {
   return (
     <div>
       {status === "available" && advertise === true && (
-        <div className="my-5 card card-compact w-96 bg-base-100 shadow-xl h-full">
-          <figure>
+        <div className="my-5 card card-compact w-96  bg-base-100 shadow-xl h-full">
+          <figure className="p-2">
             <img src={image} alt="Shoes" />
           </figure>
           <div className="card-body">

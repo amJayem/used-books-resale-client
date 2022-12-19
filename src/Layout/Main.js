@@ -5,12 +5,12 @@ import Footer from "../Pages/Shared/Footer/Footer";
 
 const Main = () => {
   return (
-    <div className="">
+    <div className="bg-indigo-50">
       <Navbar />
       <div className="">
         <Outlet />
       </div>
-      <div className="">
+      <div className="bg-white">
         <Footer />
       </div>
     </div>

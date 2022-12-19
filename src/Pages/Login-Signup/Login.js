@@ -26,7 +26,7 @@ const Login = () => {
     return Loader();
   }
 
-  console.log({user});
+  // console.log({user});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const Login = () => {
         // console.log(data);
         // setUserEmail(email);
         toast.success("User login success");
-        // navigate(from, { replace: true });
+        navigate(from, { replace: true });
       })
       .catch((e) => {
         setError(e.message);

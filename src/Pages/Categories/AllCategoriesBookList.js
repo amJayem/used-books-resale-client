@@ -18,9 +18,9 @@ const AllCategoriesBookList = ({ bookDetails, setBookInfo }) => {
 
   return (
     <div className="my-5">
-      <div className="card card-compact w-96 bg-base-100 shadow-xl h-full">
-        <figure>
-          <img className="w-52 h-80" src={image} alt="Shoes" />
+      <div className="card card-compact w-80   bg-base-100 shadow-xl h-full">
+        <figure className=" bg-indigo-200 p-2">
+          <img className="w-52 h-80 rounded-lg" src={image} alt="Shoes" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{book}</h2>
