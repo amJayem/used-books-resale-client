@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const AdvCard = ({ adBook }) => {
-  const { image, advertise, book, price, status, _id } = adBook;
+const AdvCard = ({ adBook, setBookInfo }) => {
+  const { image, advertise, book, price, status, author } = adBook;
   return (
     <div>
       {status === "available" && advertise === true && (
@@ -12,11 +11,17 @@ const AdvCard = ({ adBook }) => {
           </figure>
           <div className="card-body">
             <h2 className="card-title">{book}</h2>
+            <p>{author}</p>
             <p>${price}</p>
             <div className="card-actions justify-end">
-              <Link to={`/book-now/${_id}`} className=" btn btn-primary">
-                Book Now
-              </Link>
+              <label
+                onClick={() => setBookInfo(adBook)}
+                htmlFor="booking-modal"
+                className="btn btn-primary text-white"
+                disabled={status === "sold"}
+              >
+                book now
+              </label>
             </div>
           </div>
         </div>

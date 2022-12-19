@@ -26,20 +26,20 @@ const Navbar = () => {
       <li>
         <Link
           to="/"
-          className="btn btn-secondary btn-sm btn-outline  rounded-lg m-1 p-1"
+          className="btn btn-secondary  btn-outline  rounded-lg m-1 "
         >
           Home
         </Link>
       </li>
       <li tabIndex={0}>
-        <Link to='/categories' className=" btn btn-secondary btn-sm btn-outline  rounded-lg m-1 p-1">
+        <Link to='/categories' className=" btn btn-secondary  btn-outline  rounded-lg m-1 ">
           Categories
         </Link>
-        <ul className=" bg-white">
+        <ul className="px-2 bg-white">
           <li>
             {
               categories?.map((ctg, i)=>
-                <Link key={i} to={`/category/${ctg.categoryId}`} className="btn btn-secondary btn-sm btn-outline  rounded-lg m-1 p-1">
+                <Link key={i} to={`/category/${ctg.categoryId}`} className="btn btn-secondary  btn-outline  rounded-lg m-1 ">
               {ctg.category}
             </Link>)
             }
@@ -49,25 +49,25 @@ const Navbar = () => {
       <li>
         <Link
           to="/dashboard"
-          className="btn btn-secondary btn-sm btn-outline  rounded-lg m-1 p-1"
+          className="btn btn-secondary  btn-outline  rounded-lg m-1 "
         >
           Dashboard
         </Link>
         <Link
           to="/blog"
-          className="btn btn-secondary btn-sm btn-outline  rounded-lg m-1 p-1"
+          className="btn btn-secondary  btn-outline  rounded-lg m-1 "
         >
           Blog
         </Link>
 
         {user?.email ? (
-          <Link onClick={handleSignOut} className="btn btn-sm btn-primary text-white rounded-lg m-1 p-1">
+          <Link onClick={handleSignOut} className="btn  btn-primary text-white rounded-lg m-1 ">
             Logout
           </Link>
         ) : (
           <Link
             to="/login"
-            className="btn btn-secondary btn-sm text-white rounded-lg m-1 p-1"
+            className="btn btn-secondary  text-white rounded-lg m-1 "
           >
             Login
           </Link>
@@ -107,7 +107,7 @@ const Navbar = () => {
           <span className="font-bold text-4xl text-primary">Store</span>
         </Link>
       </div>
-      <div className="navbar-end hidden lg:flex">
+      <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{navItems}</ul>
       </div>
     </div>

@@ -71,9 +71,7 @@ const AllCategoriesBookList = ({ bookDetails, setBookInfo }) => {
             >
               book now
             </label>
-            
           </div>
-          <div>{/* The button to open modal */}</div>
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@ const BookingModal = ({ bookInfo }) => {
       resalePrice: price,
       bookPostingId: _id
     };
-    console.log(bookingInfo);
+    // console.log(bookingInfo);
 
     fetch(`https://12-book-shop-server.vercel.app/buyer-orders`, {
       method: "post",
