@@ -19,8 +19,8 @@ const CategoryItem = () => {
 
   //   console.log(object);
   return (
-    <div>
-      <h1 className="grid justify-items-center text-4xl font-semibold mt-10">Categories</h1>
+    <div className="my-16">
+      <h1 className="grid justify-items-center text-4xl font-semibold">Categories</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center my-16">
         {categories?.map((ctg) => (
           <CategoryItemCard key={ctg._id} ctg={ctg}></CategoryItemCard>

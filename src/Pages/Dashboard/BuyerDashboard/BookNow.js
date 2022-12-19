@@ -92,12 +92,9 @@ const BookNow = () => {
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleBooking}
-        className="grid grid-cols-1 justify-items-center"
-      >
-        <h1> Book Now!</h1>
+    <div className="my-5">
+      <form onSubmit={handleBooking} className="grid justify-items-center">
+        <h1 className="text-4xl font-bold"> Book Now!</h1>
         <div className="w-72">
           <img
             className="rounded-lg shadow-lg my-5"
@@ -220,7 +217,6 @@ const BookNow = () => {
             <span className="label-text-alt">Report</span>
           </label>
           <select
-          
             className="input select select-bordered "
             name="report"
             type="text"
@@ -241,6 +237,7 @@ const BookNow = () => {
           className="btn btn-secondary text-white my-5 w-full max-w-xs"
         />
       </form>
+
     </div>
   );
 };

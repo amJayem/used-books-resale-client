@@ -14,7 +14,7 @@ const ExtraSection = () => {
       <div className="hero min-h-fit bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
-            // src="https://www.seekpng.com/png/detail/43-432559_stack-of-books-image-of-stack-books-clipart.png"
+            src="https://www.seekpng.com/png/detail/43-432559_stack-of-books-image-of-stack-books-clipart.png"
             alt=""
             className="max-w-sm rounded-lg shadow-2xl"
           />

@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const AllCategoriesBookList = ({ cat }) => {
+const AllCategoriesBookList = ({ bookDetails, setBookInfo }) => {
   const {
     book,
     author,
@@ -13,14 +12,15 @@ const AllCategoriesBookList = ({ cat }) => {
     location,
     phone,
     status,
-    _id,
-  } = cat;
+  } = bookDetails;
+
+  const originalPrice = parseInt(price) + 100;
 
   return (
-    <div>
-      <div className="card card-compact w-96 bg-base-100 shadow-xl">
+    <div className="my-5">
+      <div className="card card-compact w-96 bg-base-100 shadow-xl h-full">
         <figure>
-          <img src={image} alt="Shoes" />
+          <img className="w-52 h-80" src={image} alt="Shoes" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{book}</h2>
@@ -33,8 +33,8 @@ const AllCategoriesBookList = ({ cat }) => {
             {description}
           </p>
           <p>
-            <span className="font-semibold">Resale Price: ${price}</span> <br />
-            <span>Original Price: $500</span>
+            <span className="font-semibold">Resale Price: BDT {price}</span> <br />
+            <span>Original Price: BDT {originalPrice}</span>
           </p>
           <p>
             <span className="font-semibold">Location: {location}</span>
@@ -47,33 +47,33 @@ const AllCategoriesBookList = ({ cat }) => {
             <span className="font-semibold">Condition: </span>
             {condition}
           </p>
-          {cat.years && <p>
-            <span className="font-semibold">Buying years: </span>
-            {years}
-          </p>}
+          {bookDetails.years && (
+            <p>
+              <span className="font-semibold">Buying years: </span>
+              {years}
+            </p>
+          )}
           <p>
-            {
-              status === 'sold' ?
-              <span className="text-error font-semibold">
-                Status: {status}
-              </span>
-              :
+            {status === "sold" ? (
+              <span className="text-error font-semibold">Status: {status}</span>
+            ) : (
               <span className="font-semibold text-success">
                 Status: {status}
               </span>
-            }
+            )}
           </p>
           <div className="card-actions justify-end">
-            {status === "sold" ? (
-              <Link className="btn" disabled>
-                Book Now
-              </Link>
-            ) : (
-              <Link to={`/book-now/${_id}`} className="btn btn-primary">
-                Book Now
-              </Link>
-            )}
+            <label
+              onClick={() => setBookInfo(bookDetails)}
+              htmlFor="booking-modal"
+              className="btn btn-primary text-white"
+              disabled={status === "sold" }
+            >
+              book now
+            </label>
+            
           </div>
+          <div>{/* The button to open modal */}</div>
         </div>
       </div>
     </div>
